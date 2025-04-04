@@ -17,12 +17,7 @@ const database = require("./database/database");
 
 database();
 app.use(express.json());
-app.use(
-  cors({
-    origin: [],
-    credentials: true, // Allow credentials
-  })
-);
+app.use(cors());
 
 /* Routers */
 

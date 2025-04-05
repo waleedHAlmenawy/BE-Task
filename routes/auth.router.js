@@ -29,20 +29,6 @@ const authRouter = (authController, authMiddleware) => {
     }
   );
 
-  router.post(
-    "/admin/register/cashier",
-    authMiddleware.restaurantAdmin(authController.authRepository),
-    async (req, res, next) => {
-      try {
-        const token = await authController.register(req.body, req.auth.restaurantId);
-
-        res.status(201).send(token);
-      } catch (error) {
-        next(error);
-      }
-    }
-  );
-
   return router;
 };
 module.exports = authRouter;

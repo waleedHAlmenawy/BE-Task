@@ -7,8 +7,8 @@ class ProductController {
     this.authRepository = _authRepository;
   }
 
-  async getAllProducts(restaurantId) {
-    const products = await this.productRepository.getAllProducts(restaurantId);
+  async getAllProducts() {
+    const products = await this.productRepository.getAllProducts();
 
     return products;
   }

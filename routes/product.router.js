@@ -10,9 +10,7 @@ const productRouter = (
 ) => {
   router.get("/", async (req, res, next) => {
     try {
-      const products = await productController.getAllProducts(
-        req.params.restaurantId
-      );
+      const products = await productController.getAllProducts();
 
       res.status(200).send(products);
     } catch (error) {
@@ -20,24 +18,8 @@ const productRouter = (
     }
   });
 
-  router.get("/:restaurantId/:productId", async (req, res, next) => {
-    try {
-      const { restaurantId, productId } = req.params;
-
-      const product = await productController.getRestaurantsProductsById(
-        restaurantId,
-        productId
-      );
-
-      res.status(200).send(product);
-    } catch (error) {
-      next(error);
-    }
-  });
-
   router.post(
     "/",
-    // authMiddleware.restaurantAdmin(productController.authRepository),
     // multerMiddleware.uploadSingleImage("icon"),
     async (req, res, next) => {
       try {
@@ -48,42 +30,6 @@ const productRouter = (
         next(error);
       }
     });
-
-  router.patch(
-    "/admin/:productId",
-    authMiddleware.restaurantAdmin(productController.authRepository),
-    multerMiddleware.uploadSingleImage("icon"),
-    async (req, res, next) => {
-      try {
-        const updatedProduct = await productController.updateProduct(
-          req.body,
-          req.params.productId,
-          req.auth,
-          req.file
-        );
-
-        res.status(200).send(updatedProduct);
-      } catch (error) {
-        next(error);
-      }
-    }
-  );
-
-  router.delete(
-    "/admin/:productId",
-    authMiddleware.restaurantAdmin(productController.authRepository),
-    async (req, res, next) => {
-      try {
-        const isDeleted = await productController.deleteProduct(
-          req.params.productId,
-          req.auth
-        );
-        res.status(200).send(isDeleted);
-      } catch (error) {
-        next(error);
-      }
-    }
-  );
 
   return router;
 };

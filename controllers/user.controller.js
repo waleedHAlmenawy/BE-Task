@@ -20,18 +20,6 @@ class UserController {
 
         return user;
     }
-
-    async getRestaurantsAdmins() {
-        const admins = await this.userRepository.getRestaurantsAdmins();
-
-        return admins;
-    }
-
-    async getRestaurantCashiers(resId) {
-        const cashiers = await this.userRepository.getRestaurantCashiers(resId);
-
-        return cashiers;
-    }
 }
 
 module.exports = UserController;

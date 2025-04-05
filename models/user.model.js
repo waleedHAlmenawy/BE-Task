@@ -35,17 +35,6 @@ const userSchema = mongoose.Schema({
     ref: "UserTypes",
     default: "663dfebba2ede177e6885e42",
   },
-  restaurantId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Restaurant",
-    default: null,
-  },
-  supplyChainId: {
-    type: String,
-    default: null,
-    maxLength: 255,
-    default: null,
-  },
 });
 
 const UserModel = mongoose.model("User", userSchema);

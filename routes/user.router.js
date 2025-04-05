@@ -30,34 +30,6 @@ const userRouter = (userController, authMiddleware) => {
         }
     );
 
-    router.get(
-        "/restaurantsAdmins",
-        authMiddleware.admin(userController.authRepository),
-        async (req, res, next) => {
-            try {
-                const admins = await userController.getRestaurantsAdmins(req.pagination);
-
-                res.status(200).send(admins);
-            } catch (error) {
-                next(error);
-            }
-        }
-    );
-
-    router.get(
-        "/restaurantCashiers",
-        authMiddleware.restaurantAdmin(userController.authRepository),
-        async (req, res, next) => {
-            try {
-                const cashiers = await userController.getRestaurantCashiers(req.auth.restaurantId);
-
-                res.status(200).send(cashiers);
-            } catch (error) {
-                next(error);
-            }
-        }
-    );
-
     return router;
 };
 

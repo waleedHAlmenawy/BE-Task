@@ -5,10 +5,7 @@ const validateProduct = (productInfo) => {
     const schemaRequirements = joi.object({
         title: joi.string().min(3).max(50).required(),
         price: joi.number().required(),
-        description: joi.string().min(3).max(50).required(),
         icon: joi.string().allow(null).allow('').optional(),
-        menuCategoryId: joi.objectId().required().messages({ "string.empty": "menu category is required" }),
-        ingredientsIds: joi.array().items(joi.objectId()).required(),
     });
     return schemaRequirements.validate(productInfo);
 };

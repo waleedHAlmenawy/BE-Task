@@ -32,7 +32,7 @@ class AuthController {
     return { token };
   }
 
-  async register(body, restaurantId) {
+  async register(body) {
     const { error, registerInfo } = await validateUser(body);
 
     if (error) {
@@ -53,11 +53,6 @@ class AuthController {
     //Implement logic to securely hash user password before storing.
     const passwordHash = await bcrypt.hash(body.password, 10);
     body.password = passwordHash;
-
-    if (restaurantId) {
-      body.typeId = "664fc05da9a0560d2742da1b";
-      body.restaurantId = restaurantId;
-    }
 
     //Add new user information to the database.
     user = await this.authRepository.addUser(body)
